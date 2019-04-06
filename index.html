@@ -1,0 +1,66 @@
+<html>
+	<title>L</title>
+<head>
+        <meta http-equiv="refresh" content="60">
+          <link rel="icon" href="index.png" type="image/x-icon"/>
+          <link rel="shortcut icon" href="index.png" type="image/x-icon"/>
+          <meta charset="UTF-8">
+	<script>
+
+		function myFormatNumber(a) {
+		   if(typeof(a)!="number") return "";
+		   var numStr = a.toString(), numStrLength = numStr.length,i,splitsArray = [];
+		
+		   for(i = numStrLength; i > 0; i = i - 3) {
+		      splitsArray.push(numStr.substring(i-3,i));     
+		   }
+		
+		   return splitsArray.reverse().join(' ');
+		}	
+		
+		setTimeout(function(){
+		var now = new Date(),
+			smokeStopDay = new Date(),
+			dDiff, days, hours, minutes,
+				   days_rest, hours_rest,
+			htmlContent = "", money, cigaretts;
+			
+		const packPerDay = 19/19, packPrice = 1250;
+			
+		smokeStopDay.setYear(2019);
+		smokeStopDay.setMonth(3,06);
+		smokeStopDay.setHours(15,20,0,0);
+	
+		dDiff = now - smokeStopDay;
+		days = dDiff/(3600*24*1000);
+		days_rest = dDiff%(3600*24*1000);
+		
+		htmlContent += "<b>" + Math.floor(days) + "</b> napja, <b>";
+		
+		hours = days_rest/(3600*1000);
+		hours_rest = days_rest%(3600*1000)
+		htmlContent += Math.floor(hours) + "</b> &#243;r&#225;ja, &#233;s <b>";
+		
+		minutes = hours_rest/(60*1000);
+
+		htmlContent += Math.floor(minutes) + "</b> perce.";
+		document.getElementById("myDiv1").innerHTML = htmlContent;
+		
+		money = (dDiff/(3600*24*1000))*packPerDay*packPrice;
+		cigaretts = (dDiff/(3600*24*1000))*packPerDay*19;
+
+		document.getElementById("myDiv2").innerHTML = "Ezalatt <b>" + myFormatNumber(Math.floor(cigaretts)) + "</b> sz&#225;lat nem sz&#237;vtam el &#233;s ezzel <b>" + myFormatNumber(Math.floor(money)) + "</b> forintot sp&#243;roltam.";
+		
+		},50)
+	</script>
+</head>	
+	<body>
+		<h3>Utolj&#225;ra doh&#225;nyoztam: </h3>
+		<div id="myDiv1">
+		</div>
+		<div id="myDiv2">
+		</div>
+        
+<p style="font-size: 16px; line-height: 20px; text-align: left;"><strong>20 perc múlva</strong><br>A vérnyomás és a pulzusszám normalizálódik, melegszik a keze és a lába, mert javul a vérkeringése a végtagjaiban.<br><strong>8 óra múlva</strong><br>A vér nikotin és szénmonoxid szintje a felére csökken, az oxigén szint normalizálódik. A szívinfarktus kockázata csökkenni kezd.<br><strong>24 óra múlva</strong><br>A tüdő kezd tisztulni, az ízlelés és a szaglás jelentősen javul.<br><strong>72 óra múlva</strong><br>A légzés könnyebb lesz, megkezdődik a légutak feltisztulása. Nő a szervezet energiaszintje.<br><strong>3 hónap múlva</strong><br>A köhögés, a zihálás és a légzési nehézségek csökkennek, vagy teljesen megszűnnek, a tüdőkapacitás lényegesen javul. Az íny megbetegedései jelentősen csökkennek.<br><strong>1 év múlva</strong><br>A szívroham kockázata a dohányosokkal összehasonlítva, mintegy felére csökken.<br><strong>10 év múlva</strong><br>A tüdőrák kockázata a dohányosokénak a felére csökken, azonos lesz azokéval, akik soha nem dohányoztak. A csontritkulás veszélye is csökken.<br><strong>15 év múlva</strong><br>Már nincs különbség a leszokott dohányos és a nemdohányzó között az egészségi veszélyek és a korai halálozás tekintetében.</p>
+	</body>
+</html>
