@@ -17,7 +17,7 @@
                 }
 
                 #achvs * {
-                    font-size: 25px !important;
+                    font-size: 28px !important;
                 }
 
                 .achv {
@@ -32,6 +32,19 @@
                     opacity: 0.5;
                 }
 
+                #next_achv_perc_container {
+                    height: 40px;
+                    margin-top: 45px;
+                    margin-bottom: 20px;
+                    border: 1px inset gray;
+                    padding: 10px;
+                }
+
+                #next_achv_perc_bar {
+                    height: 100%;
+                    background: gray;
+                }
+
           </style>
     <script>
 
@@ -40,37 +53,52 @@
         var GUS = (function() {
             var model = [
                 {
-                    limit: 1200000
+                    limit: 1200000,
+                    desc: "20 minutes"
                 },
                 {
-                    limit: 7200000 
+                    limit: 7200000,
+                    desc: "2 hours"
                 },
                 {
-                    limit: 43200000  
+                    limit: 43200000,
+                    desc: "12 hours"
                 },
                 {
-                    limit: 86400000
+                    limit: 86400000,
+                    desc: "24 hours"
                 },
                 {
-                    limit: 172800000
+                    limit: 172800000,
+                    desc: "2 days"
                 },
                 {
-                    limit: 259200000
+                    limit: 259200000,
+                    desc: "3 days"
                 },
                 {
-                    limit: 1209600000 
+                    limit: 1209600000,
+                    desc: "2 weeks"
                 },
                 {
-                    limit: 7776000000
+                    limit: 7889400000,
+                    desc: "3 months"
                 },
                 {
-                    limit: 157680000000
+                    limit: 31557600000,
+                    desc: "1 year"
                 },
                 {
-                    limit: 315360000000
+                    limit: 157680000000,
+                    desc: "5 years"
                 },
                 {
-                    limit: 473040000000
+                    limit: 315360000000,
+                    desc: "10 years"
+                },
+                {
+                    limit: 473040000000,
+                    desc: "15 years"
                 }
             ];
 
@@ -79,7 +107,8 @@
                 formatNumber: formatNumber,
                 render: render,
                 findCurrentAchievmentIndex: findCurrentAchievmentIndex,
-                styleNotYetAchived: styleNotYetAchived
+                styleNotYetAchived: styleNotYetAchived,
+                calcNextAchvPerc: calcNextAchvPerc
             }
 
             function findCurrentAchievmentIndex(dif) {
@@ -112,9 +141,21 @@
                     return;
                 }
 
-                for(var i = currentAchv + 1; i < model.length + 1; i++) {
+                for(var i = currentAchv + 1; i < model.length; i++) {
                     document.getElementById('achv_' + (i + 1)).classList.add('notYetAchv');
                 }
+            }
+
+            function calcNextAchvPerc(currentAchv, dif) {
+                if(currentAchv === model.length - 1) {
+                    return 100;
+                }
+
+                if(currentAchv === NOT_YET_ACHV) {
+                    return (dif / model[0].limit) * 100;
+                }
+
+                return ((dif - model[currentAchv].limit) / (model[currentAchv + 1].limit - model[currentAchv].limit)) * 100;
             }
 
             function render() {
@@ -153,6 +194,7 @@
 
                 currAchvIndex = GUS.findCurrentAchievmentIndex(dDiff);
                 GUS.styleNotYetAchived(currAchvIndex);
+                document.getElementById("next_achv_perc_bar").style.width = GUS.calcNextAchvPerc(currAchvIndex, dDiff) + "%";
             }
         })();
 
@@ -170,6 +212,11 @@
         </div>
         <div id="cig_savings">
             Ezalatt <span id="cigarettes" class="num">0</span> szálat nem szívtam el, és ezzel <span id="savings" class="num">0</span> forintot spóroltam.
+        </div>
+
+        <div id="next_achv_perc_container">
+            <div id="next_achv_perc_bar">
+            </div>
         </div>
         
         <div id="achvs"> 
