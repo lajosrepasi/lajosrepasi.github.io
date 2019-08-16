@@ -29,40 +29,40 @@
 		   return splitsArray.reverse().join(' ');
 		}	
 		
-		setTimeout(function(){
-		var now = new Date(),
-			smokeStopDay = new Date(),
-			dDiff, days, hours, minutes,
-				   days_rest, hours_rest,
-			htmlContent = "", money, cigaretts;
-			
-		const packPerDay = 19/19, packPrice = 1360;
-			
-		smokeStopDay.setYear(2019);
-		smokeStopDay.setMonth(7,16);
-		smokeStopDay.setHours(17,23,0,0);
+        document.addEventListener("DOMContentLoaded", function() {
+            var now = new Date(),
+                smokeStopDay = new Date(),
+                dDiff, days, hours, minutes,
+                       days_rest, hours_rest,
+                htmlContent = "", money, cigaretts;
+                
+            const packPerDay = 19/19, packPrice = 1360;
+                
+            smokeStopDay.setYear(2019);
+            smokeStopDay.setMonth(7,16);
+            smokeStopDay.setHours(17,23,0,0);
 
-		dDiff = now - smokeStopDay;
-		days = dDiff/(3600*24*1000);
-		days_rest = dDiff%(3600*24*1000);
-		
-		htmlContent += "<b>" + Math.floor(days) + "</b> napja, <b>";
-		
-		hours = days_rest/(3600*1000);
-		hours_rest = days_rest%(3600*1000)
-		htmlContent += Math.floor(hours) + "</b> &#243;r&#225;ja, &#233;s <b>";
-		
-		minutes = hours_rest/(60*1000);
+            dDiff = now - smokeStopDay;
+            days = dDiff/(3600*24*1000);
+            days_rest = dDiff%(3600*24*1000);
+            
+            htmlContent += "<b>" + Math.floor(days) + "</b> napja, <b>";
+            
+            hours = days_rest/(3600*1000);
+            hours_rest = days_rest%(3600*1000)
+            htmlContent += Math.floor(hours) + "</b> &#243;r&#225;ja, &#233;s <b>";
+            
+            minutes = hours_rest/(60*1000);
 
-		htmlContent += Math.floor(minutes) + "</b> perce.";
-		document.getElementById("myDiv1").innerHTML = htmlContent;
-		
-		money = (dDiff/(3600*24*1000))*packPerDay*packPrice;
-		cigaretts = (dDiff/(3600*24*1000))*packPerDay*19;
+            htmlContent += Math.floor(minutes) + "</b> perce.";
+            document.getElementById("myDiv1").innerHTML = htmlContent;
+            
+            money = (dDiff/(3600*24*1000))*packPerDay*packPrice;
+            cigaretts = (dDiff/(3600*24*1000))*packPerDay*19;
 
-		document.getElementById("myDiv2").innerHTML = "Ezalatt <b>" + myFormatNumber(Math.floor(cigaretts)) + "</b> sz&#225;lat nem sz&#237;vtam el &#233;s ezzel <b>" + myFormatNumber(Math.floor(money)) + "</b> forintot sp&#243;roltam.";
+            document.getElementById("myDiv2").innerHTML = "Ezalatt <b>" + myFormatNumber(Math.floor(cigaretts)) + "</b> sz&#225;lat nem sz&#237;vtam el &#233;s ezzel <b>" + myFormatNumber(Math.floor(money)) + "</b> forintot sp&#243;roltam.";
+        });
 		
-		},50)
 	</script>
 </head>	
 	<body>
