@@ -196,7 +196,9 @@
 
                 currAchvIndex = GUS.findCurrentAchievmentIndex(dDiff);
                 GUS.styleNotYetAchived(currAchvIndex);
-                document.getElementById("next_achv_perc_bar").style.width = GUS.calcNextAchvPerc(currAchvIndex, dDiff) + "%";
+                setTimeout(function() {
+                    document.getElementById("next_achv_perc_bar").style.width = GUS.calcNextAchvPerc(currAchvIndex, dDiff) + "%";
+                }, 500);
             }
         })();
 
