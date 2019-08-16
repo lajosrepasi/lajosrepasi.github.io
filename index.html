@@ -1,7 +1,7 @@
 <html>
 	<title>L</title>
 <head>
-    <meta http-equiv="refresh" content="60">
+    <meta http-equiv="refresh" content="600000">
           <link rel="icon" href="https://lajosrepasi.github.io/index.png" type="image/x-icon"/>
           <link rel="shortcut icon" href="https://lajosrepasi.github.io/index.png" type="image/x-icon"/>
           <link rel="apple-touch-icon" sizes="1024x1024" href="https://lajosrepasi.github.io/index.png"/>
@@ -12,66 +12,263 @@
                     font-family: sans-serif;
                 }
 
-                strong {
-                    font-size: 25px;
+                #achvs {
+                    margin-top: 50px;
                 }
+
+                #achvs * {
+                    font-size: 25px !important;
+                }
+
+                .achv {
+                    margin-bottom: 30px;
+                }
+
+                .num {
+                    font-weight: bold;
+                }
+
+                .notYetAchv {
+                    opacity: 0.5;
+                }
+
           </style>
-	<script>
+    <script>
 
-		function myFormatNumber(a) {
-		   if(typeof(a)!="number") return "";
-		   var numStr = a.toString(), numStrLength = numStr.length,i,splitsArray = [];
-		
-		   for(i = numStrLength; i > 0; i = i - 3) {
-		      splitsArray.push(numStr.substring(i-3,i));     
-		   }
-		
-		   return splitsArray.reverse().join(' ');
-		}	
-		
+        var NOT_YET_ACHV = -1;
+                
+        var GUS = (function() {
+            var model = [
+                {
+                    limit: 1200000
+                },
+                {
+                    limit: 7200000 
+                },
+                {
+                    limit: 43200000  
+                },
+                {
+                    limit: 86400000
+                },
+                {
+                    limit: 172800000
+                },
+                {
+                    limit: 259200000
+                },
+                {
+                    limit: 1209600000 
+                },
+                {
+                    limit: 7776000000
+                },
+                {
+                    limit: 157680000000
+                },
+                {
+                    limit: 315360000000
+                },
+                {
+                    limit: 473040000000
+                }
+            ];
+
+
+            return {
+                formatNumber: formatNumber,
+                render: render,
+                findCurrentAchievmentIndex: findCurrentAchievmentIndex,
+                styleNotYetAchived: styleNotYetAchived
+            }
+
+            function findCurrentAchievmentIndex(dif) {
+
+                var achv = NOT_YET_ACHV;
+
+                for (var i = 0; i < model.length; i++) {
+                    if(dif > model[i].limit) {
+                        achv = i;
+                    }
+                }
+
+                return achv;
+
+            }
+
+            function formatNumber(a) {
+                if(typeof(a)!="number") return "";
+                var numStr = a.toString(), numStrLength = numStr.length,i,splitsArray = [];
+
+                for(i = numStrLength; i > 0; i = i - 3) {
+                    splitsArray.push(numStr.substring(i-3,i));     
+                }
+
+                return splitsArray.reverse().join(' ');
+            }	
+
+            function styleNotYetAchived(currentAchv) {
+                if(currentAchv === model.length - 1) {
+                    return;
+                }
+
+                for(var i = currentAchv + 1; i < model.length + 1; i++) {
+                    document.getElementById('achv_' + (i + 1)).classList.add('notYetAchv');
+                }
+            }
+
+            function render() {
+                var now = new Date(),
+                    smokeStopDay = new Date(),
+                    dDiff, days, hours, minutes,
+                    days_rest, hours_rest,
+                    savings, cigaretts, currAchvIndex;
+
+                const packPerDay = 19/19, packPrice = 1360;
+
+                smokeStopDay.setYear(2019);
+                smokeStopDay.setMonth(7,16);
+                smokeStopDay.setHours(17,23,0,0);
+
+                dDiff = now - smokeStopDay;
+                days = dDiff/(3600*24*1000);
+                days_rest = dDiff%(3600*24*1000);
+
+                document.getElementById("days").innerHTML = Math.floor(days);
+
+                hours = days_rest/(3600*1000);
+                hours_rest = days_rest%(3600*1000)
+                document.getElementById("hours").innerHTML = Math.floor(hours);
+
+                minutes = hours_rest/(60*1000);
+
+                document.getElementById("minutes").innerHTML = Math.floor(minutes);
+
+                savings = (dDiff/(3600*24*1000))*packPerDay*packPrice;
+                cigaretts = (dDiff/(3600*24*1000))*packPerDay*19;
+
+                document.getElementById("cigarettes").innerHTML = Math.floor(cigaretts);
+                document.getElementById("savings").innerHTML = Math.floor(savings);
+
+
+                currAchvIndex = GUS.findCurrentAchievmentIndex(dDiff);
+                GUS.styleNotYetAchived(currAchvIndex);
+            }
+        })();
+
+
         document.addEventListener("DOMContentLoaded", function() {
-            var now = new Date(),
-                smokeStopDay = new Date(),
-                dDiff, days, hours, minutes,
-                       days_rest, hours_rest,
-                htmlContent = "", money, cigaretts;
-                
-            const packPerDay = 19/19, packPrice = 1360;
-                
-            smokeStopDay.setYear(2019);
-            smokeStopDay.setMonth(7,16);
-            smokeStopDay.setHours(17,23,0,0);
-
-            dDiff = now - smokeStopDay;
-            days = dDiff/(3600*24*1000);
-            days_rest = dDiff%(3600*24*1000);
-            
-            htmlContent += "<b>" + Math.floor(days) + "</b> napja, <b>";
-            
-            hours = days_rest/(3600*1000);
-            hours_rest = days_rest%(3600*1000)
-            htmlContent += Math.floor(hours) + "</b> &#243;r&#225;ja, &#233;s <b>";
-            
-            minutes = hours_rest/(60*1000);
-
-            htmlContent += Math.floor(minutes) + "</b> perce.";
-            document.getElementById("myDiv1").innerHTML = htmlContent;
-            
-            money = (dDiff/(3600*24*1000))*packPerDay*packPrice;
-            cigaretts = (dDiff/(3600*24*1000))*packPerDay*19;
-
-            document.getElementById("myDiv2").innerHTML = "Ezalatt <b>" + myFormatNumber(Math.floor(cigaretts)) + "</b> sz&#225;lat nem sz&#237;vtam el &#233;s ezzel <b>" + myFormatNumber(Math.floor(money)) + "</b> forintot sp&#243;roltam.";
+            GUS.render();
         });
 		
 	</script>
 </head>	
 	<body>
-		<h3>Utolj&#225;ra doh&#225;nyoztam: </h3>
-		<div id="myDiv1">
-		</div>
-		<div id="myDiv2">
-		</div>
+		<h3>Utoljára dohányoztam: </h3>
+        <div id="time">
+            <span id="days" class="num">0</span> napja, <span id="hours" class="num">0</span> órája, és <span id="minutes" class="num">0</span> perce.
+        </div>
+        <div id="cig_savings">
+            Ezalatt <span id="cigarettes" class="num">0</span> szálat nem szívtam el, és ezzel <span id="savings" class="num">0</span> forintot spóroltam.
+        </div>
         
-<p style="font-size: 25px !important; line-height: 35px; text-align: left;"><strong>20 perc múlva</strong><br>A vérnyomás és a pulzusszám normalizálódik, melegszik a keze és a lába, mert javul a vérkeringése a végtagjaiban.<br><strong>8 óra múlva</strong><br>A vér nikotin és szénmonoxid szintje a felére csökken, az oxigén szint normalizálódik. A szívinfarktus kockázata csökkenni kezd.<br><strong>24 óra múlva</strong><br>A tüdő kezd tisztulni, az ízlelés és a szaglás jelentősen javul.<br><strong>72 óra múlva</strong><br>A légzés könnyebb lesz, megkezdődik a légutak feltisztulása. Nő a szervezet energiaszintje.<br><strong>3 hónap múlva</strong><br>A köhögés, a zihálás és a légzési nehézségek csökkennek, vagy teljesen megszűnnek, a tüdőkapacitás lényegesen javul. Az íny megbetegedései jelentősen csökkennek.<br><strong>1 év múlva</strong><br>A szívroham kockázata a dohányosokkal összehasonlítva, mintegy felére csökken.<br><strong>10 év múlva</strong><br>A tüdőrák kockázata a dohányosokénak a felére csökken, azonos lesz azokéval, akik soha nem dohányoztak. A csontritkulás veszélye is csökken.<br><strong>15 év múlva</strong><br>Már nincs különbség a leszokott dohányos és a nemdohányzó között az egészségi veszélyek és a korai halálozás tekintetében.</p>
+        <div id="achvs"> 
+            <div id="achv_1" class="achv">
+                <h4>
+                20 perccel azután, hogy abbahagytad a dohányzást
+                </h4>
+
+                A hatás szinte azonnal érződik. A szívműködésed normalizálódik, a hajszálerek és a véredények rendszere fellélegzik. A véráramlás gyorsabb lesz, a lábaid, ujjaid érzékenysége újra a régi lesz.
+            </div>
+
+            <div id="achv_2" class="achv">
+                <h4>
+                2 órával azután, hogy abbahagytad a dohányzást
+                </h4>
+
+                2 óra után nemcsak a szervezet öngyógyító folyamatai indulnak be, a nikotinhiány is elkezd dolgozni benned. Az állapot tünete lehet az idegesség, frusztráció, alvási nehézségek, étvágytalanság.
+            </div>
+
+            <div id="achv_3" class="achv">
+                <h4>
+                12 órával azután, hogy abbahagytad a dohányzást
+                </h4>
+
+                A véredben lévő szén-monoxid szintje rohamosan csökken (a szén-monoxid a dohány égéséből keletkezik, és a cigarettafüst beszívása útján kerül a szervezetedbe), miközben az oxigén szintje nő. A vér összetétele normalizálódik, hiszen eddig a túlságosan magas szén-monoxid szint miatt a vérsejtek nem tudták megkötni az oxigént.
+            </div>
+
+            <div id="achv_4" class="achv">
+                <h4>
+                24 órával azután, hogy abbahagytad a dohányzást
+                </h4>
+
+                A dohányosoknak 70%-kal nagyobb esélyük van a koszorúér-betegség kialakulására, mint azoknak, akik nem cigiznek. Mindazonáltal már egy „tiszta” nap után is érezhető a cigi hiánya - méghozzá pozitívan! A koszorúér-betegség és a szívroham kockázata csökken.
+            </div>
+
+            <div id="achv_5" class="achv">
+                <h4>
+                2 nappal azután, hogy abbahagytad a dohányzást
+                </h4>
+
+                A szaglásod és az ízérzéked, amit a cigaretta eddig elnyomott, kezd visszatérni. Az idegvégződéseid szinte újjászületnek, jobban értékeled a kellemes illatokat, a finom ízeket, mint valaha.
+            </div>
+
+            <div id="achv_6" class="achv">
+                <h4>
+                3 nappal azután, hogy abbahagytad a dohányzást
+                </h4>
+
+                Ekkorra a nikotin teljesen kiürül a testedből, de fejfájást, hányingert, izzadást, depressziót azért tapasztalhatsz. Itt válik igazán komollyá a helyzet, az elvonási tünetek keményen érződnek. Aki itt nem adja fel, az már megtette az út nagy részét.
+            </div>
+
+            <div id="achv_7" class="achv">
+                <h4>
+                2 héttel  azután, hogy abbahagytad a dohányzást
+                </h4>
+
+                A szívroham kockázata folyamatosan csökken, hiszen a szíved terhelése is redukálódott. A függőség kellemetlen tünetei szép lassan elmúlnak, a perifériás vérkeringés működése újra a régi. A tüdő is újjászületik: a tüdőszövetek állapota javul, a tüdők működése pedig rohamos fejlődésnek indul. Fizikailag sokkal jobban érzed magad.
+            </div>
+
+            <div id="achv_8" class="achv">
+                <h4>
+                3 hónappal azután, hogy abbahagytad a dohányzást
+                </h4>
+
+                A köhögés és az asztmaszerű tünetek, amiket a rendszeres dohányzás okozott, lassan, de biztosan elmúlnak. Persze nem rögtön és nem mindegyik, hiszen a tüdőnek időre van szüksége ahhoz, hogy újra felépítse magát.
+            </div>
+
+            <div id="achv_9" class="achv">
+                <h4>
+                1 évvel azután, hogy abbahagytad a dohányzást
+                </h4>
+
+                A cigaretta utáni vágyad teljesen eltűnik, a bőröd színe újra egészséges lesz, visszanyeri rugalmasságát, puhaságát. A koszorúér-betegség kialakulásának esélye 50%-kal csökken.
+            </div>
+
+            <div id="achv_10" class="achv">
+                <h4>
+                5 évvel azután, hogy abbahagytad a dohányzást
+                </h4>
+
+                A vérkeringés teljes mértékben visszaáll a normális működéséhez. A stroke kialakulásának esélye olyan alacsony, mint azoknak, akik soha nem cigarettáztak: míg dohányoztál, addig a cigarettában lévő káros anyagok súlyos érszűkületet okoztak, így megnövelték a stroke kockázatát. Az ideg-és immunrendszer újra egészséges lesz.            
+            </div>
+
+            <div id="achv_11" class="achv">
+                <h4>
+                10 évvel azután, hogy abbahagytad a dohányzást
+                </h4>
+
+                A tüdőrák megjelenésének kockázata most kétszer kisebb, mint a láncdohányosoknak. Csökkent a torokrák, a nyelőcsőrák, a vese-és a hasnyálmirigyrák esélye.
+            </div>
+
+            <div id="achv_12" class="achv">
+                <h4>
+                15 évvel azután, hogy abbahagytad a dohányzást
+                </h4>
+
+                A koszorúér-betegségek esélye minimalizálódik, és annak a valószínűsége, hogy rákos lehetsz, kb. ugyanakkora, mint azoknál, akik nem dohányoznak.
+            </div>
+
+        </div>
 	</body>
 </html>
