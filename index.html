@@ -43,7 +43,7 @@
 
                 #next_achv_perc_bar {
                     height: 100%;
-                    width: 0%;
+                    width: 2%;
                     background: gray;
                     transition: width 1s;
                     border-radius: 20px;
@@ -199,8 +199,9 @@
                 currAchvIndex = GUS.findCurrentAchievmentIndex(dDiff);
                 GUS.styleNotYetAchived(currAchvIndex);
                 setTimeout(function() {
-                    document.getElementById("next_achv_perc_bar").style.width = GUS.calcNextAchvPerc(currAchvIndex, dDiff) + "%";
-                }, 500);
+                    var nextAchvPerc = GUS.calcNextAchvPerc(currAchvIndex, dDiff);
+                    document.getElementById("next_achv_perc_bar").style.width =  nextAchvPerc < 2 ? 2 : nextAchvPerc + "%";
+                }, 0);
             }
         })();
 
