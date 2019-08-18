@@ -117,7 +117,7 @@
             }
 
             function setValueAnim(elId, val) {
-                var counter = 0, stepTime = 7, step = Math.ceil((stepTime/500) * val);
+                var counter = 0, stepTime = 7, step = Math.ceil((stepTime/1000) * val);
                 function makeStep() {
                     counter += step;
                     if(counter > val || step === 0) {
