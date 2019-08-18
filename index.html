@@ -45,7 +45,7 @@
                     height: 100%;
                     width: 2%;
                     background: gray;
-                    transition: width 0.7s;
+                    transition: width 1.5s;
                     border-radius: 20px;
                 }
 
@@ -117,7 +117,7 @@
             }
 
             function setValueAnim(elId, val) {
-                var counter = 0, stepTime = 7, step = Math.ceil((stepTime/1000) * val);
+                var counter = 0, stepTime = 7, step = Math.ceil((stepTime/2000) * val);
                 function makeStep() {
                     counter += step;
                     if(counter > val || step === 0) {
