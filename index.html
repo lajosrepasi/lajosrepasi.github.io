@@ -38,6 +38,7 @@
                     margin-bottom: 20px;
                     border: 2px inset gray;
                     padding: 10px;
+                    border-radius: 30px;
                 }
 
                 #next_achv_perc_bar {
@@ -45,6 +46,7 @@
                     width: 0%;
                     background: gray;
                     transition: width 1s;
+                    border-radius: 20px;
                 }
 
           </style>
@@ -177,21 +179,21 @@
                 days = dDiff/(3600*24*1000);
                 days_rest = dDiff%(3600*24*1000);
 
-                document.getElementById("days").innerHTML = Math.floor(days);
+                document.getElementById("days").innerHTML = GUS.formatNumber(Math.floor(days));
 
                 hours = days_rest/(3600*1000);
                 hours_rest = days_rest%(3600*1000)
-                document.getElementById("hours").innerHTML = Math.floor(hours);
+                document.getElementById("hours").innerHTML = GUS.formatNumber(Math.floor(hours));
 
                 minutes = hours_rest/(60*1000);
 
-                document.getElementById("minutes").innerHTML = Math.floor(minutes);
+                document.getElementById("minutes").innerHTML = GUS.formatNumber(Math.floor(minutes));
 
                 savings = (dDiff/(3600*24*1000))*packPerDay*packPrice;
                 cigaretts = (dDiff/(3600*24*1000))*packPerDay*19;
 
-                document.getElementById("cigarettes").innerHTML = Math.floor(cigaretts);
-                document.getElementById("savings").innerHTML = Math.floor(savings);
+                document.getElementById("cigarettes").innerHTML = GUS.formatNumber(Math.floor(cigaretts));
+                document.getElementById("savings").innerHTML = GUS.formatNumber(Math.floor(savings));
 
 
                 currAchvIndex = GUS.findCurrentAchievmentIndex(dDiff);
