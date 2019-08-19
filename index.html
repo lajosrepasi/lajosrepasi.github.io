@@ -220,7 +220,7 @@
                 GUS.styleNotYetAchived(currAchvIndex);
                 setTimeout(function() {
                     var nextAchvPerc = GUS.calcNextAchvPerc(currAchvIndex, dDiff);
-                    document.getElementById("next_achv_perc_bar").style.width =  nextAchvPerc < 2 ? 2 : nextAchvPerc + "%";
+                    document.getElementById("next_achv_perc_bar").style.width =  (nextAchvPerc < 2 ? 2 : nextAchvPerc) + "%";
                 }, 0);
             }
         })();
