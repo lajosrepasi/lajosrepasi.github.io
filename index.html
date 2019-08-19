@@ -117,22 +117,25 @@
             }
 
             function setValueAnim(elId, val) {
-                var counter = 0, stepTime = 7, step = Math.ceil((stepTime/2000) * val);
+                var counter = 0, stepTime = 7, step = (stepTime/1000) * val;
+                var start = + new Date();
                 function makeStep() {
-                    counter += step;
                     if(counter > val || step === 0) {
-                        document.getElementById(elId).innerHTML = GUS.formatNumber(val);
+                        document.getElementById(elId).innerHTML = GUS.formatNumber(Math.floor(val));
+                        console.log('end: ' + elId + ' time: ' + (new Date() - start), ' step: ' + step)
                     }
                     else {
-                        document.getElementById(elId).innerHTML = GUS.formatNumber(counter);
+                        document.getElementById(elId).innerHTML = GUS.formatNumber(Math.floor(counter));
                         setTimeout(function() {
                             makeStep();
                         },stepTime);
+                    counter += step;
                     }
                 }
 
                 makeStep();
             }
+
             function findCurrentAchievmentIndex(dif) {
 
                 var achv = NOT_YET_ACHV;
