@@ -117,7 +117,7 @@
             }
 
             function setValueAnim(elId, val) {
-                var counter = 0, stepTime = 7, step = (stepTime/1000) * val;
+                var counter = 0, stepTime = 7, step = (stepTime/2000) * val;
                 var start = + new Date();
                 function makeStep() {
                     if(counter > val || step === 0) {
