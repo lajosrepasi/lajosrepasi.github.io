@@ -46,6 +46,10 @@
                     margin-bottom: 10px;
                     margin-top: 50px;
                 }
+                
+                .data-sm-val {
+                    font-size: 38px;
+                }
 
                 .data-value {
                     background: rgba(255, 255, 255, 0.75);
@@ -56,8 +60,9 @@
                     padding-top: 15px;
                     mix-blend-mode: screen;
                     color: black;
-                    border-radius: 5px;
+                    border-radius: 10px;
                     margin-bottom: 10px;
+                    font-weight: bold;
                 }
 
                 #achvs {
@@ -299,16 +304,16 @@
         </div>
 
         <div class="data-header">eltelt idő</div>
-        <div id="days" class="data-value">0</div> nap <br/>
-        <div id="hours" class="data-value">0</div>  óra <br/> 
-        <div id="minutes" class="data-value">0</div>  perc
+        <div id="days" class="data-value">0</div> <span class="data-sm-val">nap</span> <br/>
+        <div id="hours" class="data-value">0</div>  <span class="data-sm-val">óra</span> <br/> 
+        <div id="minutes" class="data-value">0</div>  <span class="data-sm-val">perc</span>
 
         <div class="data-header">el nem szívott szálak</div>
         <div id="cigarettes" class="data-value">0</div>
 
 
         <div class="data-header">megspórolt pénz</div>
-        <div id="savings" class="data-value">0</div> Ft.
+        <div id="savings" class="data-value">0</div> <span class="data-sm-val">Ft</span>
 
         <div id="next_achv_perc_container">
             <div id="next_achv_perc_bar">
