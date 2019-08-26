@@ -44,6 +44,7 @@
                 .data-header {
                     text-transform: uppercase;
                     margin-bottom: 10px;
+                    margin-top: 50px;
                 }
 
                 .data-value {
@@ -56,6 +57,7 @@
                     mix-blend-mode: screen;
                     color: black;
                     border-radius: 5px;
+                    margin-bottom: 10px;
                 }
 
                 #achvs {
@@ -68,10 +70,6 @@
 
                 .achv {
                     margin-bottom: 30px;
-                }
-
-                .num {
-                    font-weight: bold;
                 }
 
                 .notYetAchv {
@@ -159,7 +157,8 @@
                 findCurrentAchievmentIndex: findCurrentAchievmentIndex,
                 styleNotYetAchived: styleNotYetAchived,
                 calcNextAchvPerc: calcNextAchvPerc,
-                setValueAnim: setValueAnim
+                setValueAnim: setValueAnim,
+                formatDate: formatDate
             }
 
             function setValueAnim(elId, val) {
@@ -230,6 +229,19 @@
                 return ((dif - model[currentAchv].limit) / (model[currentAchv + 1].limit - model[currentAchv].limit)) * 100;
             }
 
+
+            function formatDate(date) {
+                var d = date || new Date();
+                function z(n){return (n<10?'0':'')+n}
+                return ( 
+                    d.getFullYear() + '.' +
+                    z(d.getMonth()+1) + '.' +
+                    z(d.getDate()) + '.  ' + 
+                    z(d.getHours()) + ':' +
+                    z(d.getMinutes())
+                );
+            } 
+
             function render() {
                 var now = new Date(),
                     smokeStopDay = new Date(Date.UTC(2019, 7, 24, 8, 14)),
@@ -240,7 +252,7 @@
                 const packPerDay = 19/19, packPrice = 1360;
 
 
-                document.getElementById('smoke_stop_date').innerHTML = new Intl.DateTimeFormat('hu-HU', { dateStyle: "short", timeStyle:"short" }).format(smokeStopDay);
+                document.getElementById('smoke_stop_date').innerHTML = GUS.formatDate(smokeStopDay);
 
                 dDiff = now - smokeStopDay;
                 days = dDiff/(3600*24*1000);
@@ -285,14 +297,18 @@
         <div class="data-header">utolsó cigaretta időpontja</div>
         <div class="data-value" id="smoke_stop_date">
         </div>
-        <div id="time">
-            <span id="days" class="num">0</span> napja,  <span id="hours" class="num">0</span>  órája, és  <span id="minutes" class="num">0</span>  perce.
-        </div>
 
-        <div id="cig_savings">
-            Ezalatt  <span id="cigarettes" class="num">0</span>  szálat nem szívtam el, 
-            <br/> és ezzel  <span id="savings" class="num">0</span>  forintot spóroltam.
-        </div>
+        <div class="data-header">eltelt idő</div>
+        <div id="days" class="data-value">0</div> nap <br/>
+        <div id="hours" class="data-value">0</div>  óra <br/> 
+        <div id="minutes" class="data-value">0</div>  perc
+
+        <div class="data-header">el nem szívott szálak</div>
+        <div id="cigarettes" class="data-value">0</div>
+
+
+        <div class="data-header">megspórolt pénz</div>
+        <div id="savings" class="data-value">0</div> Ft.
 
         <div id="next_achv_perc_container">
             <div id="next_achv_perc_bar">
