@@ -16,10 +16,16 @@
                 }
 
                 body {
-                    margin: 30px;
+                    margin: 0;
+                    padding: 0;
+                    position: absolute;
+                }
+
+                #container {
                     padding: 30px;
-                    padding-top: 0px;
+                    margin: 30px;
                     border-left: 1px solid white;
+                    padding-top: 0;
                 }
 
                 #backgr {
@@ -264,22 +270,23 @@
         })();
 
 
-        document.addEventListener("DOMContentLoaded", function() {
-            GUS.render();
-        });
-		
-	</script>
+    document.addEventListener("DOMContentLoaded", function() {
+        GUS.render();
+    });
+
+    </script>
 </head>	
-	<body>
-        <div id="backgr">
-        </div>
-		<div class="data-header">utolsó cigaretta időpontja</div>
-		<div class="data-value" id="smoke_stop_date">
+<body>
+    <div id="backgr">
+    </div>
+    <div id="container">
+        <div class="data-header">utolsó cigaretta időpontja</div>
+        <div class="data-value" id="smoke_stop_date">
         </div>
         <div id="time">
             <span id="days" class="num">0</span> napja,  <span id="hours" class="num">0</span>  órája, és  <span id="minutes" class="num">0</span>  perce.
         </div>
-        
+
         <div id="cig_savings">
             Ezalatt  <span id="cigarettes" class="num">0</span>  szálat nem szívtam el, 
             <br/> és ezzel  <span id="savings" class="num">0</span>  forintot spóroltam.
@@ -289,11 +296,11 @@
             <div id="next_achv_perc_bar">
             </div>
         </div>
-        
+
         <div id="achvs"> 
             <div id="achv_1" class="achv">
                 <h4>
-                20 perccel azután, hogy abbahagytad a dohányzást
+                    20 perccel azután, hogy abbahagytad a dohányzást
                 </h4>
 
                 A hatás szinte azonnal érződik. A szívműködésed normalizálódik, a hajszálerek és a véredények rendszere fellélegzik. A véráramlás gyorsabb lesz, a lábaid, ujjaid érzékenysége újra a régi lesz.
@@ -301,7 +308,7 @@
 
             <div id="achv_2" class="achv">
                 <h4>
-                2 órával azután, hogy abbahagytad a dohányzást
+                    2 órával azután, hogy abbahagytad a dohányzást
                 </h4>
 
                 2 óra után nemcsak a szervezet öngyógyító folyamatai indulnak be, a nikotinhiány is elkezd dolgozni benned. Az állapot tünete lehet az idegesség, frusztráció, alvási nehézségek, étvágytalanság.
@@ -309,7 +316,7 @@
 
             <div id="achv_3" class="achv">
                 <h4>
-                12 órával azután, hogy abbahagytad a dohányzást
+                    12 órával azután, hogy abbahagytad a dohányzást
                 </h4>
 
                 A véredben lévő szén-monoxid szintje rohamosan csökken (a szén-monoxid a dohány égéséből keletkezik, és a cigarettafüst beszívása útján kerül a szervezetedbe), miközben az oxigén szintje nő. A vér összetétele normalizálódik, hiszen eddig a túlságosan magas szén-monoxid szint miatt a vérsejtek nem tudták megkötni az oxigént.
@@ -317,7 +324,7 @@
 
             <div id="achv_4" class="achv">
                 <h4>
-                24 órával azután, hogy abbahagytad a dohányzást
+                    24 órával azután, hogy abbahagytad a dohányzást
                 </h4>
 
                 A dohányosoknak 70%-kal nagyobb esélyük van a koszorúér-betegség kialakulására, mint azoknak, akik nem cigiznek. Mindazonáltal már egy „tiszta” nap után is érezhető a cigi hiánya - méghozzá pozitívan! A koszorúér-betegség és a szívroham kockázata csökken.
@@ -325,7 +332,7 @@
 
             <div id="achv_5" class="achv">
                 <h4>
-                2 nappal azután, hogy abbahagytad a dohányzást
+                    2 nappal azután, hogy abbahagytad a dohányzást
                 </h4>
 
                 A szaglásod és az ízérzéked, amit a cigaretta eddig elnyomott, kezd visszatérni. Az idegvégződéseid szinte újjászületnek, jobban értékeled a kellemes illatokat, a finom ízeket, mint valaha.
@@ -333,7 +340,7 @@
 
             <div id="achv_6" class="achv">
                 <h4>
-                3 nappal azután, hogy abbahagytad a dohányzást
+                    3 nappal azután, hogy abbahagytad a dohányzást
                 </h4>
 
                 Ekkorra a nikotin teljesen kiürül a testedből, de fejfájást, hányingert, izzadást, depressziót azért tapasztalhatsz. Itt válik igazán komollyá a helyzet, az elvonási tünetek keményen érződnek. Aki itt nem adja fel, az már megtette az út nagy részét.
@@ -341,7 +348,7 @@
 
             <div id="achv_7" class="achv">
                 <h4>
-                2 héttel  azután, hogy abbahagytad a dohányzást
+                    2 héttel  azután, hogy abbahagytad a dohányzást
                 </h4>
 
                 A szívroham kockázata folyamatosan csökken, hiszen a szíved terhelése is redukálódott. A függőség kellemetlen tünetei szép lassan elmúlnak, a perifériás vérkeringés működése újra a régi. A tüdő is újjászületik: a tüdőszövetek állapota javul, a tüdők működése pedig rohamos fejlődésnek indul. Fizikailag sokkal jobban érzed magad.
@@ -349,7 +356,7 @@
 
             <div id="achv_8" class="achv">
                 <h4>
-                3 hónappal azután, hogy abbahagytad a dohányzást
+                    3 hónappal azután, hogy abbahagytad a dohányzást
                 </h4>
 
                 A köhögés és az asztmaszerű tünetek, amiket a rendszeres dohányzás okozott, lassan, de biztosan elmúlnak. Persze nem rögtön és nem mindegyik, hiszen a tüdőnek időre van szüksége ahhoz, hogy újra felépítse magát.
@@ -357,7 +364,7 @@
 
             <div id="achv_9" class="achv">
                 <h4>
-                1 évvel azután, hogy abbahagytad a dohányzást
+                    1 évvel azután, hogy abbahagytad a dohányzást
                 </h4>
 
                 A cigaretta utáni vágyad teljesen eltűnik, a bőröd színe újra egészséges lesz, visszanyeri rugalmasságát, puhaságát. A koszorúér-betegség kialakulásának esélye 50%-kal csökken.
@@ -365,7 +372,7 @@
 
             <div id="achv_10" class="achv">
                 <h4>
-                5 évvel azután, hogy abbahagytad a dohányzást
+                    5 évvel azután, hogy abbahagytad a dohányzást
                 </h4>
 
                 A vérkeringés teljes mértékben visszaáll a normális működéséhez. A stroke kialakulásának esélye olyan alacsony, mint azoknak, akik soha nem cigarettáztak: míg dohányoztál, addig a cigarettában lévő káros anyagok súlyos érszűkületet okoztak, így megnövelték a stroke kockázatát. Az ideg-és immunrendszer újra egészséges lesz.            
@@ -373,7 +380,7 @@
 
             <div id="achv_11" class="achv">
                 <h4>
-                10 évvel azután, hogy abbahagytad a dohányzást
+                    10 évvel azután, hogy abbahagytad a dohányzást
                 </h4>
 
                 A tüdőrák megjelenésének kockázata most kétszer kisebb, mint a láncdohányosoknak. Csökkent a torokrák, a nyelőcsőrák, a vese-és a hasnyálmirigyrák esélye.
@@ -381,12 +388,13 @@
 
             <div id="achv_12" class="achv">
                 <h4>
-                15 évvel azután, hogy abbahagytad a dohányzást
+                    15 évvel azután, hogy abbahagytad a dohányzást
                 </h4>
 
                 A koszorúér-betegségek esélye minimalizálódik, és annak a valószínűsége, hogy rákos lehetsz, kb. ugyanakkora, mint azoknál, akik nem dohányoznak.
             </div>
 
         </div>
+    </div>
 	</body>
 </html>
