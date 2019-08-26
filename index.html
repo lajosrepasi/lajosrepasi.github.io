@@ -1,7 +1,7 @@
 <html>
 	<title>L</title>
 <head>
-    <meta http-equiv="refresh" content="60">
+    <meta http-equiv="refresh" content="60000">
           <link rel="icon" href="https://lajosrepasi.github.io/index.png" type="image/x-icon"/>
           <link rel="shortcut icon" href="https://lajosrepasi.github.io/index.png" type="image/x-icon"/>
           <link rel="apple-touch-icon" sizes="1024x1024" href="https://lajosrepasi.github.io/index.png"/>
@@ -12,15 +12,41 @@
                     font-size: 45px;
                     font-family: 'Raleway';
                     color: rgba(255, 255, 255, 0.75);
+                    font-weight: bold;
                 }
 
                 body {
+                    margin: 30px;
+                    padding: 30px;
+                    padding-top: 0px;
+                    border-left: 1px solid white;
+                }
+
+                #backgr {
+                    top: 0;
+                    left: 0;
+                    bottom: 0;
+                    right: 0;
                     background-image: url(bg2.png);
                     background-size: cover;
                     background-attachment: fixed;
-                    margin: 20px;
-                    padding: 20px;
-                    border-left: 1px solid white;
+                    position: absolute;
+                    z-index: -1;
+                }
+
+                .data-header {
+                    text-transform: uppercase;
+                    margin-bottom: 10px;
+                }
+
+                .data-value {
+                    background: rgba(255, 255, 255, 0.75);
+                    display: inline-block;
+                    padding: 5px;
+                    padding-left: 10px;
+                    padding-right: 10px;
+                    mix-blend-mode: screen;
+                    color: black;
                 }
 
                 #achvs {
@@ -197,16 +223,15 @@
 
             function render() {
                 var now = new Date(),
-                    smokeStopDay = new Date(),
+                    smokeStopDay = new Date(Date.UTC(2019, 7, 24, 8, 14)),
                     dDiff, days, hours, minutes,
                     days_rest, hours_rest,
                     savings, cigarettes, currAchvIndex;
 
                 const packPerDay = 19/19, packPrice = 1360;
 
-                smokeStopDay.setYear(2019);
-                smokeStopDay.setMonth(7,24);
-                smokeStopDay.setHours(8,14,0,0);
+
+                document.getElementById('smoke_stop_date').innerHTML = new Intl.DateTimeFormat('hu-HU', { dateStyle: "short", timeStyle:"short" }).format(smokeStopDay);
 
                 dDiff = now - smokeStopDay;
                 days = dDiff/(3600*24*1000);
@@ -245,7 +270,11 @@
 	</script>
 </head>	
 	<body>
-		<h3>Utoljára dohányoztam: </h3>
+        <div id="backgr">
+        </div>
+		<div class="data-header">utolsó cigaretta időpontja</div>
+		<div class="data-value" id="smoke_stop_date">
+        </div>
         <div id="time">
             <span id="days" class="num">0</span> napja,  <span id="hours" class="num">0</span>  órája, és  <span id="minutes" class="num">0</span>  perce.
         </div>
