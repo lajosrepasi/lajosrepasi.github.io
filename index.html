@@ -1,7 +1,7 @@
 <html>
 	<title>L</title>
 <head>
-    <meta http-equiv="refresh" content="60">
+    <meta http-equiv="refresh" content="60000">
           <link rel="icon" href="https://lajosrepasi.github.io/index.png" type="image/x-icon"/>
           <link rel="shortcut icon" href="https://lajosrepasi.github.io/index.png" type="image/x-icon"/>
           <link rel="apple-touch-icon" sizes="1024x1024" href="https://lajosrepasi.github.io/index.png"/>
@@ -107,10 +107,12 @@
                     margin-top: 45px;
                     margin-bottom: 20px;
                     padding: 5px;
+                    position: relative;
+                    width: 434px;
                 }
 
                 #next_achv_rad_container circle {
-                    opacity: 0.75;
+                    opacity: 0.9;
                 }
 
                 #next_achv_rad_bar {
@@ -122,6 +124,25 @@
                     transform: rotate(-90deg);
                 }
 
+                #next_achv_rad_lbl {
+                    background: rgba(255, 255, 255, 0.75);
+                    color: black;
+                    width: 300px;
+                    height: 300px;
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    -webkit-transform: translate(-50%, -50%);
+                    transform: translate(-50%, -50%);
+                    border-radius: 50%;
+                    mix-blend-mode: screen;
+                    text-align: center;
+                    vertical-align: middle;
+                    line-height: 300px; 
+                    font-size: 50px;
+                    font-weight: bold;
+                }
+
           </style>
     <script>
 
@@ -131,51 +152,51 @@
             var model = [
                 {
                     limit: 1200000,
-                    desc: "20 minutes"
+                    desc: "20 perc"
                 },
                 {
                     limit: 7200000,
-                    desc: "2 hours"
+                    desc: "2 óra"
                 },
                 {
                     limit: 43200000,
-                    desc: "12 hours"
+                    desc: "12 óra"
                 },
                 {
                     limit: 86400000,
-                    desc: "24 hours"
+                    desc: "24 óra"
                 },
                 {
                     limit: 172800000,
-                    desc: "2 days"
+                    desc: "2 nap"
                 },
                 {
                     limit: 259200000,
-                    desc: "3 days"
+                    desc: "3 nap"
                 },
                 {
                     limit: 1209600000,
-                    desc: "2 weeks"
+                    desc: "2 hét"
                 },
                 {
                     limit: 7889400000,
-                    desc: "3 months"
+                    desc: "3 hónap"
                 },
                 {
                     limit: 31557600000,
-                    desc: "1 year"
+                    desc: "1 év"
                 },
                 {
                     limit: 157680000000,
-                    desc: "5 years"
+                    desc: "5 év"
                 },
                 {
                     limit: 315360000000,
-                    desc: "10 years"
+                    desc: "10 év"
                 },
                 {
                     limit: 473040000000,
-                    desc: "15 years"
+                    desc: "15 év"
                 }
             ];
 
@@ -259,13 +280,15 @@
                 return ((dif - model[currentAchv].limit) / (model[currentAchv + 1].limit - model[currentAchv].limit)) * 100;
             }
 
-            function setNextAchvRadialBar(percentage) {
+            function setNextAchvRadialBar(percentage, currAchvIndex) {
                 var r = 190.0,
                     c = 2 * r * Math.PI,
                     bar = document.getElementById("next_achv_rad_bar");
 
                 bar.style.strokeDasharray = c;
                 bar.style.strokeDashoffset = c * (1 - percentage/100);
+
+                document.getElementById("next_achv_rad_lbl").innerHTML = model[currAchvIndex].desc;
             }
 
             function formatDate(date) {
@@ -318,7 +341,7 @@
                     var nextAchvPerc = GUS.calcNextAchvPerc(currAchvIndex, dDiff);
                     document.getElementById("next_achv_perc_bar").style.width =  (nextAchvPerc < 2 ? 2 : nextAchvPerc) + "%";
 
-                    GUS.setNextAchvRadialBar(nextAchvPerc);
+                    GUS.setNextAchvRadialBar(nextAchvPerc, currAchvIndex);
                 }, 0);
             }
         })();
@@ -353,10 +376,12 @@
 
         <div id="next_achv_rad_container">
             <svg id="next_achv_rad_svg" width="434" height="434" viewBox="0 0 434 434">
-                <circle cx="217" cy="217" r="216" fill="none" stroke="#e6e6e6" stroke-width="1" />
-                <circle cx="217" cy="217" r="164" fill="none" stroke="#e6e6e6" stroke-width="1" />
+                <circle cx="217" cy="217" r="216" fill="none" stroke="#e6e6e6" stroke-width="2" />
+                <circle cx="217" cy="217" r="164" fill="none" stroke="#e6e6e6" stroke-width="2" />
                 <circle id="next_achv_rad_bar" cx="217" cy="217" r="190" fill="none" stroke="#e6e6e6" stroke-width="40" stroke-dashoffset="1193.81" />
             </svg>
+            <div id="next_achv_rad_lbl">
+            </div>
         </div>
 
         <div id="next_achv_perc_container">
