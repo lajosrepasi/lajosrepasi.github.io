@@ -103,6 +103,10 @@
                     border-radius: 20px;
                 }
 
+                #next_achv_rad_container circle {
+                    opacity: 0.75;
+                }
+
           </style>
     <script>
 
@@ -168,7 +172,8 @@
                 styleNotYetAchived: styleNotYetAchived,
                 calcNextAchvPerc: calcNextAchvPerc,
                 setValueAnim: setValueAnim,
-                formatDate: formatDate
+                formatDate: formatDate,
+                setNextAchvRadialBar: setNextAchvRadialBar 
             }
 
             function setValueAnim(elId, val) {
@@ -239,6 +244,10 @@
                 return ((dif - model[currentAchv].limit) / (model[currentAchv + 1].limit - model[currentAchv].limit)) * 100;
             }
 
+            function setNextAchvRadialBar(percentage) {
+                var r = 35.0,
+                    c = 2 * r * Math.PI;
+            }
 
             function formatDate(date) {
                 var d = date || new Date();
@@ -289,6 +298,8 @@
                 setTimeout(function() {
                     var nextAchvPerc = GUS.calcNextAchvPerc(currAchvIndex, dDiff);
                     document.getElementById("next_achv_perc_bar").style.width =  (nextAchvPerc < 2 ? 2 : nextAchvPerc) + "%";
+
+                    GUS.setNextAchvRadialBar(nextAchvPerc);
                 }, 0);
             }
         })();
@@ -322,8 +333,10 @@
 
 
         <div id="next_achv_rad_container">
-            <svg width="400" height="400" viewBox="0 0 400 400">
-                <circle cx="200" cy="200" r="180" fill="none" stroke="#e6e6e6" stroke-width="40" />
+            <svg width="422" height="422" viewBox="0 0 422 422">
+                <circle cx="211" cy="211" r="210" fill="none" stroke="#e6e6e6" stroke-width="1" />
+                <circle cx="211" cy="211" r="170" fill="none" stroke="#e6e6e6" stroke-width="1" />
+                <circle cx="211" cy="211" r="190" fill="none" stroke="#e6e6e6" stroke-width="35" />
             </svg>
         </div>
 
