@@ -103,8 +103,23 @@
                     border-radius: 20px;
                 }
 
+                #next_achv_rad_container {
+                    margin-top: 45px;
+                    margin-bottom: 20px;
+                    padding: 5px;
+                }
+
                 #next_achv_rad_container circle {
                     opacity: 0.75;
+                }
+
+                #next_achv_rad_bar {
+                    stroke-linecap: round; 
+                    transition: stroke-dashoffset 2.2s;
+                }
+
+                #next_achv_rad_svg {
+                    transform: rotate(-90deg);
                 }
 
           </style>
@@ -245,8 +260,12 @@
             }
 
             function setNextAchvRadialBar(percentage) {
-                var r = 35.0,
-                    c = 2 * r * Math.PI;
+                var r = 190.0,
+                    c = 2 * r * Math.PI,
+                    bar = document.getElementById("next_achv_rad_bar");
+
+                bar.style.strokeDasharray = c;
+                bar.style.strokeDashoffset = c * (1 - percentage/100);
             }
 
             function formatDate(date) {
@@ -333,10 +352,10 @@
 
 
         <div id="next_achv_rad_container">
-            <svg width="422" height="422" viewBox="0 0 422 422">
-                <circle cx="211" cy="211" r="210" fill="none" stroke="#e6e6e6" stroke-width="1" />
-                <circle cx="211" cy="211" r="170" fill="none" stroke="#e6e6e6" stroke-width="1" />
-                <circle cx="211" cy="211" r="190" fill="none" stroke="#e6e6e6" stroke-width="35" />
+            <svg id="next_achv_rad_svg" width="434" height="434" viewBox="0 0 434 434">
+                <circle cx="217" cy="217" r="216" fill="none" stroke="#e6e6e6" stroke-width="1" />
+                <circle cx="217" cy="217" r="164" fill="none" stroke="#e6e6e6" stroke-width="1" />
+                <circle id="next_achv_rad_bar" cx="217" cy="217" r="190" fill="none" stroke="#e6e6e6" stroke-width="40" stroke-dashoffset="1193.81" />
             </svg>
         </div>
 
