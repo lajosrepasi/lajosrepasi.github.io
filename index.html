@@ -288,7 +288,7 @@
                 bar.style.strokeDasharray = c;
                 bar.style.strokeDashoffset = c * (1 - percentage/100);
 
-                document.getElementById("next_achv_rad_lbl").innerHTML = model[currAchvIndex].desc;
+                document.getElementById("next_achv_rad_lbl").innerHTML = model[currAchvIndex == model.length ? currAchvIndex : currAchvIndex + 1].desc;
             }
 
             function formatDate(date) {
