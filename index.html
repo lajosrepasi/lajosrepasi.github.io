@@ -104,11 +104,11 @@
                 }
 
                 #next_achv_rad_container {
-                    margin-top: 45px;
+                    margin-top: 15px;
                     margin-bottom: 20px;
                     padding: 5px;
                     position: relative;
-                    width: 434px;
+                    width: 342px;
                 }
 
                 #next_achv_rad_container circle {
@@ -125,10 +125,10 @@
                 }
 
                 #next_achv_rad_lbl {
-                    background: rgba(255, 255, 255, 0.75);
+                    background: rgba(255, 255, 255, 0.65);
                     color: black;
-                    width: 300px;
-                    height: 300px;
+                    width: 250px;
+                    height: 250px;
                     position: absolute;
                     left: 50%;
                     top: 50%;
@@ -138,9 +138,7 @@
                     mix-blend-mode: screen;
                     text-align: center;
                     vertical-align: middle;
-                    line-height: 300px; 
-                    font-size: 50px;
-                    font-weight: bold;
+                    line-height: 250px; 
                 }
 
           </style>
@@ -281,7 +279,7 @@
             }
 
             function setNextAchvRadialBar(percentage, currAchvIndex) {
-                var r = 190.0,
+                var r = 150.0,
                     c = 2 * r * Math.PI,
                     bar = document.getElementById("next_achv_rad_bar");
 
@@ -374,11 +372,12 @@
         <div id="savings" class="data-value">0</div> <span class="data-sm-val">Ft</span>
 
 
+        <div class="data-header">következő mérföldkő</div>
         <div id="next_achv_rad_container">
-            <svg id="next_achv_rad_svg" width="434" height="434" viewBox="0 0 434 434">
-                <circle cx="217" cy="217" r="216" fill="none" stroke="#e6e6e6" stroke-width="2" />
-                <circle cx="217" cy="217" r="164" fill="none" stroke="#e6e6e6" stroke-width="2" />
-                <circle id="next_achv_rad_bar" cx="217" cy="217" r="190" fill="none" stroke="#e6e6e6" stroke-width="40" stroke-dashoffset="1193.81" />
+            <svg id="next_achv_rad_svg" width="342" height="342" viewBox="0 0 342 342">
+                <circle cx="171" cy="171" r="170" fill="none" stroke="#e6e6e6" stroke-width="2" />
+                <circle cx="171" cy="171" r="130" fill="none" stroke="#e6e6e6" stroke-width="2" />
+                <circle id="next_achv_rad_bar" cx="171" cy="171" r="150" fill="none" stroke="#e6e6e6" stroke-width="30" stroke-dashoffset="942.477" />
             </svg>
             <div id="next_achv_rad_lbl">
             </div>
