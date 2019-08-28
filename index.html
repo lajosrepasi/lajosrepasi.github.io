@@ -1,7 +1,7 @@
 <html>
 	<title>L</title>
 <head>
-    <meta http-equiv="refresh" content="60">
+    <meta http-equiv="refresh" content="6000">
           <link rel="icon" href="https://lajosrepasi.github.io/index.png" type="image/x-icon"/>
           <link rel="shortcut icon" href="https://lajosrepasi.github.io/index.png" type="image/x-icon"/>
           <link rel="apple-touch-icon" sizes="1024x1024" href="https://lajosrepasi.github.io/index.png"/>
@@ -39,7 +39,7 @@
                     left: 0;
                     bottom: 0;
                     right: 0;
-                    background-image: url(bg2.png);
+                    background-image: url(bg3.jpg);
                     background-size: cover;
                     background-attachment: fixed;
                     position: absolute;
@@ -84,23 +84,6 @@
 
                 .notYetAchv {
                     opacity: 0.5;
-                }
-
-                #next_achv_perc_container {
-                    height: 40px;
-                    margin-top: 45px;
-                    margin-bottom: 20px;
-                    border: 1px solid white;
-                    padding: 5px;
-                    border-radius: 30px;
-                }
-
-                #next_achv_perc_bar {
-                    height: 100%;
-                    width: 2%;
-                    background: rgba(255, 255, 255, 0.75);
-                    transition: width 2.2s;
-                    border-radius: 20px;
                 }
 
                 #next_achv_rad_container {
@@ -281,10 +264,13 @@
             function setNextAchvRadialBar(percentage, currAchvIndex) {
                 var r = 150.0,
                     c = 2 * r * Math.PI,
-                    bar = document.getElementById("next_achv_rad_bar");
+                    barWidth = 30,
+                    bar = document.getElementById("next_achv_rad_bar"),
+                    strokeDashoffset;
 
                 bar.style.strokeDasharray = c;
-                bar.style.strokeDashoffset = c * (1 - percentage/100);
+                strokeDashoffset = c * (1 - percentage/100) + 30;
+                bar.style.strokeDashoffset = strokeDashoffset > c ? (c - 0.01) : strokeDashoffset; 
 
                 document.getElementById("next_achv_rad_lbl").innerHTML = model[currAchvIndex == model.length ? currAchvIndex : currAchvIndex + 1].desc;
             }
@@ -337,7 +323,6 @@
                 GUS.styleNotYetAchived(currAchvIndex);
                 setTimeout(function() {
                     var nextAchvPerc = GUS.calcNextAchvPerc(currAchvIndex, dDiff);
-                    document.getElementById("next_achv_perc_bar").style.width =  (nextAchvPerc < 2 ? 2 : nextAchvPerc) + "%";
 
                     GUS.setNextAchvRadialBar(nextAchvPerc, currAchvIndex);
                 }, 0);
@@ -380,11 +365,6 @@
                 <circle id="next_achv_rad_bar" cx="171" cy="171" r="150" fill="none" stroke="#e6e6e6" stroke-width="30" stroke-dashoffset="942.477" />
             </svg>
             <div id="next_achv_rad_lbl">
-            </div>
-        </div>
-
-        <div id="next_achv_perc_container">
-            <div id="next_achv_perc_bar">
             </div>
         </div>
 
