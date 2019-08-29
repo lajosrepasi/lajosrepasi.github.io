@@ -1,7 +1,7 @@
 <html>
 	<title>L</title>
 <head>
-    <meta http-equiv="refresh" content="60">
+    <meta http-equiv="refresh" content="6000">
           <link rel="icon" href="https://lajosrepasi.github.io/index.png" type="image/x-icon"/>
           <link rel="shortcut icon" href="https://lajosrepasi.github.io/index.png" type="image/x-icon"/>
           <link rel="apple-touch-icon" sizes="1024x1024" href="https://lajosrepasi.github.io/index.png"/>
@@ -15,10 +15,14 @@
                     font-weight: lighter;
                 }
 
+                html, body {
+                    margin: 0;
+                    height: 100%;
+                }
+
                 body {
                     margin: 0;
                     padding: 0;
-                    position: absolute;
                     background: black;
                 }
 
@@ -34,6 +38,10 @@
                     padding-top: 0;
                     border-top: 1px solid white;
                     border-radius: 10px 0px 0px 0px;
+                }
+
+                #values_ctn {
+                    transition: all 0.8s linear;
                 }
 
                 #backgr {
@@ -97,7 +105,14 @@
                 }
 
                 #achvs {
-                    margin-top: 50px;
+                    opacity: 0;
+                    position: fixed;
+                    overflow: scroll;
+                    top: 530px;
+                    bottom: 30px;
+                    left: 60px;
+                    right: 50px;
+                    transition: all 0.8s linear;
                 }
 
                 #achvs * {
@@ -121,6 +136,13 @@
 
                 #next_achv_rad_container circle {
                     opacity: 0.9;
+                }
+
+                #next_achv_container {
+                    position: relative;
+                    margin-top: 60px;
+                    transition: all 0.8s linear;
+                    top: 0px;
                 }
 
                 #next_achv_rad_bar {
@@ -215,7 +237,29 @@
                 calcNextAchvPerc: calcNextAchvPerc,
                 setValueAnim: setValueAnim,
                 formatDate: formatDate,
-                setNextAchvRadialBar: setNextAchvRadialBar 
+                setNextAchvRadialBar: setNextAchvRadialBar,
+                onNextAchvClick: onNextAchvClick
+            }
+
+            function onNextAchvClick() {
+                var achvs = document.getElementById('achvs')
+                var values = document.getElementById('values_ctn');
+                var nextAchv = document.getElementById('next_achv_container');
+
+                if(GUS.isAchvOpen) {
+                    achvs.style.opacity = 0.0;
+                    values.style.opacity = 1.0;
+                    nextAchv.style.top = '0px';
+
+                    GUS.isAchvOpen = false;
+                }
+                else {
+                    achvs.style.opacity = 1.0;
+                    values.style.opacity = 0.0;
+                    nextAchv.style.top = '-860px';
+
+                    GUS.isAchvOpen = true;
+                }
             }
 
             function setValueAnim(elId, val) {
@@ -351,6 +395,10 @@
 
                     GUS.setNextAchvRadialBar(nextAchvPerc, currAchvIndex);
                 }, 0);
+
+                document.getElementById('next_achv_rad_container').addEventListener('click', function() {
+                    GUS.onNextAchvClick();
+                });
             }
         })();
 
@@ -365,30 +413,22 @@
     <div id="backgr">
     </div>
     <div id="container">
-        <div class="data-header">utolsó cigaretta elszívása</div>
-        <div class="data-value" id="smoke_stop_date">
-        </div>
 
-        <div class="data-header">eltelt idö</div>
-        <div id="days" class="data-value">0</div> <span class="data-sm-val">nap</span> <br/>
-        <div id="hours" class="data-value">0</div>  <span class="data-sm-val">óra</span> <br/> 
-        <div id="minutes" class="data-value">0</div>  <span class="data-sm-val">perc</span>
-
-        <div class="data-header">el nem szívott szálak</div>
-        <div id="cigarettes" class="data-value">0</div> <span class="data-sm-val">db</span>
-
-        <div class="data-header">megspórolt pénz</div>
-        <div id="savings" class="data-value">0</div> <span class="data-sm-val">Ft</span>
-
-        <div class="data-header">következö mérföldkö</div>
-        <div id="next_achv_rad_container">
-            <svg id="next_achv_rad_svg" width="342" height="342" viewBox="0 0 342 342">
-                <circle cx="171" cy="171" r="170" fill="none" stroke="#e6e6e6" stroke-width="2" />
-                <circle cx="171" cy="171" r="130" fill="none" stroke="#e6e6e6" stroke-width="2" />
-                <circle id="next_achv_rad_bar" cx="171" cy="171" r="150" fill="none" stroke="#e6e6e6" stroke-width="30" stroke-dashoffset="942.477" />
-            </svg>
-            <div id="next_achv_rad_lbl">
+        <div id="values_ctn">
+            <div class="data-header">utolsó cigaretta elszívása</div>
+            <div class="data-value" id="smoke_stop_date">
             </div>
+
+            <div class="data-header">eltelt idö</div>
+            <div id="days" class="data-value">0</div> <span class="data-sm-val">nap</span> <br/>
+            <div id="hours" class="data-value">0</div>  <span class="data-sm-val">óra</span> <br/> 
+            <div id="minutes" class="data-value">0</div>  <span class="data-sm-val">perc</span>
+
+            <div class="data-header">el nem szívott szálak</div>
+            <div id="cigarettes" class="data-value">0</div> <span class="data-sm-val">db</span>
+
+            <div class="data-header">megspórolt pénz</div>
+            <div id="savings" class="data-value">0</div> <span class="data-sm-val">Ft</span>
         </div>
 
         <div id="achvs"> 
@@ -489,6 +529,21 @@
             </div>
 
         </div>
+
+        <div id="next_achv_container">
+            <div class="data-header">következö mérföldkö</div>
+            <div id="next_achv_rad_container">
+                <svg id="next_achv_rad_svg" width="342" height="342" viewBox="0 0 342 342">
+                    <circle cx="171" cy="171" r="170" fill="none" stroke="#e6e6e6" stroke-width="2" />
+                    <circle cx="171" cy="171" r="130" fill="none" stroke="#e6e6e6" stroke-width="2" />
+                    <circle id="next_achv_rad_bar" cx="171" cy="171" r="150" fill="none" stroke="#e6e6e6" stroke-width="30" stroke-dashoffset="942.477" />
+                </svg>
+                <div id="next_achv_rad_lbl">
+                </div>
+            </div>
+        </div>
+
+
     </div>
 	</body>
 </html>
