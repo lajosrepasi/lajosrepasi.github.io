@@ -1,7 +1,7 @@
 <html>
 	<title>L</title>
 <head>
-    <meta http-equiv="refresh" content="60">
+    <meta http-equiv="refresh" content="60000">
           <link rel="icon" href="https://lajosrepasi.github.io/index.png" type="image/x-icon"/>
           <link rel="shortcut icon" href="https://lajosrepasi.github.io/index.png" type="image/x-icon"/>
           <link rel="apple-touch-icon" sizes="1024x1024" href="https://lajosrepasi.github.io/index.png"/>
@@ -39,22 +39,12 @@
                     left: 0px;
                     bottom: 0px;
                     right: 0px;
-                    background: radial-gradient(#005073, #107dac, #189ad3);
+                    background-image: url('bg4.jpg');
                     position: absolute;
                     z-index: -1;
-                    background-size: 800% 300%;
-                    animation: gradient 10s linear infinite;
-                    animation-direction: alternate;
+                    background-size: cover;
+                    background-attachment: fixed;
                 }
-
-                @keyframes gradient {
-                    0% {
-                        background-position: 0%;
-                    }
-                    100% {
-                        background-position: 100%;
-                    }
-                } 
 
                 .data-header {
                     text-transform: uppercase;
