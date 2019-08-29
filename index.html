@@ -54,6 +54,17 @@
                     background-repeat: no-repeat;
                     background-attachment: fixed;
                     opacity: 0.9;
+                    animation: gradient 10s linear infinite;
+                    animation-direction: alternate;
+                }
+                @keyframes gradient {
+                    0% {background-position: 10% 30%}
+                    30% {background-position: 20% 25%}
+                    50% {background-position: 60% 35%}
+                    75% {background-position: 50% 60%}
+                    85% {background-position: 50% 60%}
+                    95% {background-position: 80% 90%}
+                    95% {background-position: 100% 100%}
                 }
 
                 .data-header {
