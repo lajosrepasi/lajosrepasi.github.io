@@ -125,7 +125,7 @@
 
                 #next_achv_rad_bar {
                     stroke-linecap: round; 
-                    transition: stroke-dashoffset 3.5s;
+                    transition: stroke-dashoffset 2.5s;
                 }
 
                 #next_achv_rad_svg {
@@ -291,7 +291,7 @@
                     c = 2 * r * Math.PI,
                     barWidth = 30,
                     bar = document.getElementById("next_achv_rad_bar"),
-                    changeInterval = 3500 / (currAchvIndex+1),
+                    changeInterval = 2500 / (currAchvIndex+1),
                     strokeDashoffset;
 
                 bar.style.strokeDasharray = c;
