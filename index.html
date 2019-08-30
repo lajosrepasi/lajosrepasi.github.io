@@ -312,7 +312,7 @@
                 }
 
                 function setAchvLabel(achvIndx) {
-                    document.getElementById("next_achv_rad_lbl").innerHTML = model[achvIndx == model.length ? achvIndx : achvIndx + 1].desc;
+                    document.getElementById("next_achv_rad_lbl").innerHTML = model[achvIndx > model.length ? (model.length - 1) : achvIndx].desc;
                 }
 
             }
