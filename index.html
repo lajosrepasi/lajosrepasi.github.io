@@ -125,7 +125,7 @@
 
                 #next_achv_rad_bar {
                     stroke-linecap: round; 
-                    transition: stroke-dashoffset 2.2s;
+                    transition: stroke-dashoffset 3.5s;
                 }
 
                 #next_achv_rad_svg {
@@ -291,13 +291,30 @@
                     c = 2 * r * Math.PI,
                     barWidth = 30,
                     bar = document.getElementById("next_achv_rad_bar"),
+                    changeInterval = 3500 / (currAchvIndex+1),
                     strokeDashoffset;
 
                 bar.style.strokeDasharray = c;
-                strokeDashoffset = c * (1 - percentage/100) + 30;
-                bar.style.strokeDashoffset = strokeDashoffset > c ? (c - 0.01) : strokeDashoffset; 
+                strokeDashoffset = c * (1 - percentage/100) + barWidth;
+                bar.style.strokeDashoffset = ((strokeDashoffset > c ? (c - 0.01) : strokeDashoffset)) + currAchvIndex*2*c; 
 
-                document.getElementById("next_achv_rad_lbl").innerHTML = model[currAchvIndex == model.length ? currAchvIndex : currAchvIndex + 1].desc;
+                if(currAchvIndex == 0) {
+                    setAchvLabel(currAchvIndex);
+                }
+                else {
+                    for(var i = 0; i < currAchvIndex + 1; i++) {
+                        (function(ii) {
+                            setTimeout(function() {
+                                setAchvLabel(ii)
+                            }, changeInterval * ii);
+                        })(i);
+                    }
+                }
+
+                function setAchvLabel(achvIndx) {
+                    document.getElementById("next_achv_rad_lbl").innerHTML = model[achvIndx == model.length ? achvIndx : achvIndx + 1].desc;
+                }
+
             }
 
             function formatDate(date) {
