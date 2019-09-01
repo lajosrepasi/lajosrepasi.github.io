@@ -125,7 +125,7 @@
 
                 #next_achv_rad_bar {
                     stroke-linecap: round; 
-                    transition: stroke-dashoffset 2.5s;
+                    transition: stroke-dashoffset 3.0s;
                 }
 
                 #next_achv_rad_svg {
@@ -296,7 +296,7 @@
 
                 bar.style.strokeDasharray = c;
                 strokeDashoffset = c * (1 - percentage/100) + barWidth;
-                bar.style.strokeDashoffset = ((strokeDashoffset > c ? (c - 0.01) : strokeDashoffset)) - currAchvIndex*2*c; 
+                bar.style.strokeDashoffset = ((strokeDashoffset > c ? (c - 0.01) : strokeDashoffset)) + currAchvIndex*2*c; 
 
                 if(currAchvIndex == 0) {
                     setAchvLabel(currAchvIndex);
