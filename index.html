@@ -125,7 +125,7 @@
 
                 #next_achv_rad_bar {
                     stroke-linecap: round; 
-                    transition: stroke-dashoffset 3.0s;
+                    transition: stroke-dashoffset 2.0s;
                 }
 
                 #next_achv_rad_svg {
@@ -219,7 +219,7 @@
             }
 
             function setValueAnim(elId, val) {
-                var counter = 0, stepTime = 7, step = Math.pow((stepTime/2000) * val, 0.97);
+                var counter = 0, stepTime = 7, step = Math.pow((stepTime/1000) * val, 0.97);
                 var start = + new Date();
                 function makeStep() {
                     if(counter > val || step === 0) {
@@ -291,7 +291,7 @@
                     c = 2 * r * Math.PI,
                     barWidth = 30,
                     bar = document.getElementById("next_achv_rad_bar"),
-                    changeInterval = 2500 / (currAchvIndex+1),
+                    changeInterval = 1300 / (currAchvIndex+1),
                     strokeDashoffset;
 
                 bar.style.strokeDasharray = c;
