@@ -342,8 +342,12 @@
                 document.getElementById('smoke_stop_date').innerHTML = GUS.formatDate(smokeStopDay);
 
                 dDiff = now - smokeStopDay;
-                days = dDiff/(3600*24*1000);
-                days_rest = dDiff%(3600*24*1000);
+		years = dDiff/(3600*24*1000*365.25); 
+		years_rest = years%(3600*24*1000*365.25);  
+		GUS.setValueAnim("years", Math.floor(years));
+                
+		days = years_rest/(3600*24*1000);
+                days_rest = year_rest%(3600*24*1000);
 
                 GUS.setValueAnim("days", Math.floor(days));
 
@@ -387,7 +391,8 @@
         </div>
 
         <div class="data-header">eltelt idö</div>
-        <div id="days" class="data-value">0</div> <span class="data-sm-val">nap</span> <br/>
+        <div id="years" class="data-value">0</div> <span class="data-sm-val">év</span> <br/>
+	<div id="days" class="data-value">0</div> <span class="data-sm-val">nap</span> <br/>
         <div id="hours" class="data-value">0</div>  <span class="data-sm-val">óra</span> <br/> 
         <div id="minutes" class="data-value">0</div>  <span class="data-sm-val">perc</span>
 
