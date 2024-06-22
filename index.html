@@ -332,8 +332,8 @@
             function render() {
                 var now = new Date(),
                     smokeStopDay = new Date(Date.UTC(2019, 7, 27, 14, 41)),
-                    dDiff, days, hours, minutes,
-                    days_rest, hours_rest,
+                    dDiff, years, days, hours, minutes,
+                    years_rest, days_rest, hours_rest,
                     savings, cigarettes, currAchvIndex;
 
                 const packPerDay = 19/19, packPrice = 1360;
@@ -343,7 +343,7 @@
 
                 dDiff = now - smokeStopDay;
 		years = dDiff/(3600*24*1000*365.25); 
-		years_rest = years%(3600*24*1000*365.25);  
+		years_rest = dDiff%(3600*24*1000*365.25);  
 		GUS.setValueAnim("years", Math.floor(years));
                 
 		days = years_rest/(3600*24*1000);
