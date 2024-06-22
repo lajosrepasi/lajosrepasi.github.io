@@ -283,7 +283,7 @@
                     return (dif / model[0].limit) * 100;
                 }
 
-                return ((dif - model[currentAchv].limit) / (model[currentAchv + 1].limit - model[currentAchv].limit)) * 100;
+                return ((dif) / (model[currentAchv + 1].limit)) * 100;
             }
 
             function setNextAchvRadialBar(percentage, currAchvIndex) {
